@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import DetailPage from './pages/DetailPage';
+import MainPage from './pages/MainPage';
+import GlobalStyles from './styles/GlobalStyles';
 import reportWebVitals from './reportWebVitals';
 
+const rootElement = document.getElementById('root')
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <BrowserRouter>
+    <GlobalStyles />
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="board/:boardNo" element={<DetailPage />} />
+    </Routes>
+  </BrowserRouter>,
+  rootElement
 );
 
 // If you want to start measuring performance in your app, pass a function

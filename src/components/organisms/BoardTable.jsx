@@ -1,7 +1,8 @@
 import { TableCell, TableRow } from '@mui/material';
-
-function BoardTable(props) {
-  const { data } = props;
+import { Link, Outlet } from 'react-router-dom';
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+function BoardTable({ data }) {
   return (
     <TableRow
       key={data.boardNo}
@@ -10,22 +11,19 @@ function BoardTable(props) {
       <TableCell component="th" scope="row" variant="head">
         {data.boardNo}
       </TableCell>
-      <TableCell>{data.boardTitle}</TableCell>
+      <TableCell>
+        <Link to={`/board/${data.boardNo}`} key={data.boardNo}>
+          {data.boardTitle}
+        </Link>
+      </TableCell>
       <TableCell>{data.boardAuthor}</TableCell>
       <TableCell>{data.boardContent}</TableCell>
-      <TableCell>{data.boardCreatedAt}</TableCell>
+      <TableCell>
+        {dayjs(data.boardCreatedAt)
+          .locale('ko-KR')
+          .format('YYYY-MM-DD (dd) HH:mm:ss')}
+      </TableCell>
     </TableRow>
-    // <div
-    //   style={{
-    //     display: 'flex',
-    //   }}
-    // >
-    //   <p>{data.boardNo} </p>
-    //   <p>{data.boardTitle} </p>
-    //   <p>{data.boardAuthor} </p>
-    //   <p>{data.boardContent} </p>
-    //   <p>{data.boardCreatedAt} </p>
-    // </div>
   );
 }
 
